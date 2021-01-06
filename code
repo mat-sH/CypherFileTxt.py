@@ -1,0 +1,41 @@
+# CypherFileTxt.py
+#Simple cypher for file .txt
+####################################################################
+ #######                  CypherFileTxt.py                  #######
+  ######               ----------------------               ######
+   #####               --------- by ---------               #####
+    ####               -----   mat-sH   -----               ####
+     ###               ----------------------               ###
+      ########################################################
+
+import os
+import sys
+
+message = str(input('Type dir file, then press Enter: '))
+outputfilename = message
+key = 10
+mode = input("press [e] to encrypt, or [d] to decrypt: ")
+letters = 'ABCDEFGHIJLMNOPQRSTUWXYZabcdefghijlmnopqrstuwxyz/\''',.:-_)(*&^%$#@!~|}{][;1234567890""'
+translated = ' '
+fileObj = open(message)
+content = fileObj.read()
+fileObj.close()
+
+for symbol in content:
+    if symbol in letters:
+        num = letters.find(symbol)
+        if mode == 'e':
+            num = num + key
+        elif mode == 'd':
+            num = num - key
+        if num >= len(letters):
+            num - len(letters)
+        elif num < 0:
+            num = num + len(letters)
+        translated = translated + letters[num]
+    else:
+        translated = translated + symbol
+                                                                                                   
+fileObj = open(message, 'w')
+fileObj.write(translated)
+fileObj.close()
